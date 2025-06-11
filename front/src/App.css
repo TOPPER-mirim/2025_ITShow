@@ -1,15 +1,129 @@
+/* 기본 설정 */
 body,
 #root {
   margin: 0;
-  /* background: transparent; 투명 */
 }
 
-.app-container {
-    width: 100vw;
-    height: 100vh;
-    background-image: url('./img/backgroundimg.png');  /* ✅ 올바른 방식 */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+/* 전체 배경 */
+.app-container,
+.app-background {
+  width: 100vw;
+  height: 100vh;
+  background-image: url('./img/backgroundimg.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 50px;
+  box-sizing: border-box;
+  position: relative; 
+}
+
+/* 수정구슬 멘트 오버레이 */
+.magic-orb-overlay-message {
+  position: absolute;
+  top: 50%;  
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+}
+
+.star-container {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  width: 700px;
+  height: auto;
+  z-index: 10;
+}
+
+/* 별 래퍼 */
+.star-wrapper {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+/* 별 이미지 */
+.star-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
+}
+
+/* 입력칸 위치 */
+.star-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70%;
+  transform: translate(-50%, -50%);
+}
+
+/* 입력 필드 (input + textarea 공통) */
+.star-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  text-align: center;
+  font-size: 20px;
+  font-family: 'Noto Sans KR', sans-serif; /* ✅ 폰트 통일 */
+  color: #121212;
+  resize: none;
+}
+
+.star-input:focus {
+  outline: none;
+}
+
+/* 버튼 */
+.star-submit-button {
+  position: absolute;
+  bottom: -50px; /* 별 아래에 위치 */
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* 비행 애니메이션 */
+.star-container.fly {
+  transform: translate(500px, -100px) scale(0.2);
+  opacity: 0;
+}
+
+.star-image.with-trail {
+  animation: sparkleTrail 2s forwards;
+}
+
+@keyframes sparkleTrail {
+  0% {
+    filter: drop-shadow(0 0 10px #ffffff) drop-shadow(0 0 20px #ffd6ff);
   }
-  
+  100% {
+    filter: drop-shadow(0 0 30px #fff0f5) drop-shadow(0 0 60px #ffe4ff);
+  }
+}
+
+.crystal-canvas {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: transparent !important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  pointer-events: none;
+}
+

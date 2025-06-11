@@ -46,7 +46,7 @@ function ShimmeringReflection() {
   });
 
   return (
-    <mesh rotation-x={-Math.PI / 2} position={[0, -0.7, 0]}>
+    <mesh rotation-x={-Math.PI / 2} position={[, 0, 0]}>
       <circleGeometry args={[2.5, 64]} />
       <shaderMaterial
         ref={shaderMaterial}
@@ -95,7 +95,7 @@ function GradientBackground() {
   });
 
   return (
-    <mesh scale={[10, 10, 10]} rotation={[0, 0, 0]}>
+    <mesh scale={[10, 10, 10]} rotation={[0, 0, 10]}>
       <sphereGeometry args={[1, 64, 64]} />
       <shaderMaterial
         ref={shaderMaterial}
@@ -127,24 +127,25 @@ function GradientBackground() {
 }
 
 export default function CrystalBallScene() {
-    return (
-      <Canvas
-        camera={{ position: [0, 0, 4], fov: 45 }}
-        gl={{ alpha: true }}
-        style={{ background: 'transparent' }}
-      >
-        <ambientLight intensity={0.6} />
-        <directionalLight position={[2, 5, 2]} intensity={2} />
-        <group>
-          {/* <GradientBackground /> */}
-          <CrystalBall />
-          <BackgroundSphere />
-          <FloatingParticles />
-          {/* <GlowParticles /> */}
-          {/* <ShimmeringReflection /> */}
-        </group>
-        <OrbitControls enablePan={false} enableZoom={false} />
-      </Canvas>
-    );
-  }
-  
+  return (
+    <Canvas
+      camera={{ position: [0, 0, 4], fov: 45 }}
+      onCreated={({ gl }) => {
+        gl.setClearColor(0x000000, 0); // 완전 투명하게!
+      }}  
+      className="crystal-canvas"
+    >
+      <ambientLight intensity={0.6} />
+      <directionalLight position={[2, 5, 2]} intensity={2} />
+      <group>
+        {/* <GradientBackground /> */}
+        <CrystalBall />
+        <BackgroundSphere />
+        <FloatingParticles />
+        {/* <GlowParticles /> */}
+        {/* <ShimmeringReflection /> */}
+      </group>
+      <OrbitControls enablePan={false} enableZoom={false} />
+    </Canvas>
+  );
+}
